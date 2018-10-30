@@ -1,7 +1,6 @@
 import pytest
-import time
-from application import Application
-from group import Group
+from addressbook.fixture.application import Application
+from addressbook.model.group import Group
 
 
 @pytest.fixture()
@@ -22,7 +21,8 @@ def test_login(app):
 
 def test_add_group(app):
     app.open_home_page()
-    app.login()
+    app.session.login()
     app.create_group(Group('2', '22', '222'))
     app.return_to_groups()
+    app.session.logout()
 

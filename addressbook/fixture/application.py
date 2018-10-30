@@ -1,4 +1,5 @@
 from selenium import webdriver
+from addressbook.fixture.session import SessionHelper
 
 
 class Application:
@@ -6,6 +7,7 @@ class Application:
     def __init__(self):
         self.wd = webdriver.Chrome()
         self.wd.implicitly_wait(6)
+        self.session = SessionHelper(self)
 
     def open_home_page(self):
         wd = self.wd
@@ -15,13 +17,6 @@ class Application:
         wd = self.wd
         wd.find_element_by_link_text('groups').click()
 
-    def login(self):
-        wd = self.wd
-        wd.find_element_by_name('user').click()
-        wd.find_element_by_name('user').send_keys('admin')
-        wd.find_element_by_name('pass').click()
-        wd.find_element_by_name('pass').send_keys('secret')
-        wd.find_element_by_css_selector('input[type=\"submit\"]').click()
 
     def create_group(self, group):
         wd = self.wd
@@ -40,9 +35,6 @@ class Application:
         wd = self.wd
         wd.find_element_by_link_text('groups').click()
 
-    def logout(self):
-        wd = self.wd
-        wd.find_element_by_link_text('Logout').click()
 
     def destroy(self):
         wd = self.wd
